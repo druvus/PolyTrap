@@ -1,0 +1,93 @@
+# config.yaml
+
+# Focus organisms (high priority, with special handling)
+focus_organisms:
+  - name: "puumala"  # Organism identifier
+    segments:
+      L: "data/puumala_L.fasta"
+      M: "data/puumala_M.fasta"
+      S: "data/puumala_S.fasta"
+  # Add more focus organisms as needed
+  - name: "other_focus"  # Example of another focus organism
+    segments:
+      segment1: "data/other_focus_segment1.fasta"
+      segment2: "data/other_focus_segment2.fasta"
+
+# Target organisms (regular priority)
+target_organisms:
+  - name: "orthohanta"  # Organism identifier
+    segments:
+      L: "data/orthohanta_L.fasta"
+      M: "data/orthohanta_M.fasta"
+      S: "data/orthohanta_S.fasta"
+  # Add more target organisms as needed
+  - name: "other_target"  # Example of another target organism
+    segments:
+      segA: "data/other_target_segA.fasta"
+      segB: "data/other_target_segB.fasta"
+
+# Blacklist FASTA files
+blacklist_files:
+  - "data/blacklist_1.fasta"
+  - "data/blacklist_2.fasta"
+  # Add more blacklist files as needed
+
+# Per-organism design parameters
+organism_params:
+  default:  # Default parameters for all organisms
+    probe_length: 120
+    mismatches: [2, 3]
+    lcf_thres: 100
+    coverage: 1.0
+    probe_stride: [60, 80]
+    design_segment_ends: False
+    segment_end_stride: 30
+    segment_end_size: 500
+    overlap: 50
+    use_lsh_minhash: False
+    lsh_minhash_threshold: 0.6
+  
+  puumala:  # Override parameters for specific organism
+    mismatches: [2, 3]
+    lcf_thres: 100
+    design_segment_ends: True
+    segment_end_stride: 30
+    segment_end_size: 500
+    overlap: 50
+    analysis_mismatches: 2
+    analysis_lcf_thres: 100
+  
+  orthohanta:  # Override parameters for another organism
+    mismatches: [3, 5]
+    lcf_thres: 90
+    analysis_mismatches: 5
+    analysis_lcf_thres: 90
+
+# Output directories
+output_dirs:
+  probes: "results/probes"
+  segments: "results/segments"
+  blacklist: "results/blacklist"
+  analysis: "results/analysis"
+  mapping: "results/mapping"
+
+# Conda environments directory
+conda_envs: "envs"
+
+# Logging directory
+logs_dir: "logs"
+
+# Other parameters
+max_cores: 10  # Adjust based on your system
+
+# Minimap2 parameters
+minimap2:
+  preset: "sr"          # e.g. "sr", "asm5", "map-ont", etc.
+  k: 19
+  w: 10
+  threads: 40
+  min_coverage: 40      # coverage threshold for filtering
+  min_identity: 0.3     # identity threshold for filtering
+
+# Folder containing reference genomes
+genome_folder: "data/results/genomes"
